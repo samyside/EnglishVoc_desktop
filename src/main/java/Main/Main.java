@@ -1,6 +1,6 @@
 package Main;
 
-import Frame.FrameTemp;
+import Frames.FrameTemp;
 
 public class Main {
     private static FrameTemp frame = new FrameTemp();
