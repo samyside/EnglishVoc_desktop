@@ -1,14 +1,10 @@
 package Frames;
 
 import Service.Actions;
+import Service.DataBase.DatabaseCheck;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.sql.*;
 
 public class FrameTemp extends JFrame {
     private JPanel panel1;
@@ -24,11 +20,11 @@ public class FrameTemp extends JFrame {
     private JTextField enterTheAnswerTextField;
     private JButton button5;
 
-    public JLabel labelOutput;
+    private JLabel labelOutput;
 
     private Actions action = new Actions();
-
     private SimpleDialog dialogRight = new SimpleDialog("Right!");
+    private DatabaseCheck database = new DatabaseCheck();
 
     public FrameTemp() {
         super("Title name");
@@ -37,37 +33,14 @@ public class FrameTemp extends JFrame {
         setMinimumSize(new Dimension(500, 350));
         setLocationRelativeTo(null);
 
+        enterTheAnswerTextField.addActionListener(action);
+        button1.addActionListener(action);
+        enterTheAnswerTextField.addFocusListener(action);
+        enterTheAnswerTextField.addFocusListener(action);
+
+        labelOutput.setText(database.getFirstName());
 
 
-        enterTheAnswerTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
-        // clear inputTextField when it focused
-        enterTheAnswerTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                enterTheAnswerTextField.setText("");
-            }
-        });
-
-        enterTheAnswerTextField.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                enterTheAnswerTextField.setText("put a text here");
-            }
-        });
-    }
-
-    public static JFrame getThisFrame() {
-        return null;
     }
 
 }
