@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Frames.FrameTemp">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+  <grid id="27dc6" binding="panelMain" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
@@ -92,10 +92,10 @@
                 </constraints>
                 <properties>
                   <font name="Ubuntu" size="22" style="0"/>
-                  <text value="A word from the DB"/>
+                  <text value="Enter the your answer"/>
                 </properties>
               </component>
-              <component id="50c6c" class="javax.swing.JTextField" binding="enterTheAnswerTextField" default-binding="true">
+              <component id="50c6c" class="javax.swing.JTextField" binding="textInput" default-binding="true">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>

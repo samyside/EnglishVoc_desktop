@@ -1,46 +1,75 @@
 package Frames;
 
 import Service.Actions;
-import Service.DataBase.DatabaseCheck;
+import Service.DataBase.Database;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class FrameTemp extends JFrame {
-    private JPanel panel1;
+    private JPanel panelMain;
     private JPanel panelTop;
     private JPanel panelBottom;
     private JPanel panelLeft;
     private JPanel panelCenter;
     private JPanel panelContent;
+    private JButton button1;
     private JButton button2;
     private JButton button3;
     private JButton button4;
-    private JButton button1;
-    private JTextField enterTheAnswerTextField;
     private JButton button5;
-
+    private JTextField textInput;
     private JLabel labelOutput;
 
-    private Actions action = new Actions();
-    private SimpleDialog dialogRight = new SimpleDialog("Right!");
-    private DatabaseCheck database = new DatabaseCheck();
+    private Database database = new Database();
+    private Actions action = new Actions(this, database);
 
     public FrameTemp() {
         super("Title name");
-        setContentPane(panel1);
+        setContentPane(panelMain);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(500, 350));
+        setMaximumSize(new Dimension(800,500));
         setLocationRelativeTo(null);
 
-        enterTheAnswerTextField.addActionListener(action);
+        textInput.addActionListener(action);
+        textInput.addFocusListener(action);
         button1.addActionListener(action);
-        enterTheAnswerTextField.addFocusListener(action);
-        enterTheAnswerTextField.addFocusListener(action);
+        button2.addActionListener(action);
+        button3.addActionListener(action);
+        button4.addActionListener(action);
+        button5.addActionListener(action);
 
-        labelOutput.setText(database.getFirstName());
-
+        database.createConnection();
+        labelOutput.setText(database.getFirstWord());
 
     }
 
+    public JButton getButton1() {
+        return button1;
+    }
+
+    public JButton getButton2() {
+        return button2;
+    }
+
+    public JButton getButton3() {
+        return button3;
+    }
+
+    public JButton getButton4() {
+        return button4;
+    }
+
+    public JButton getButton5() {
+        return button5;
+    }
+
+    public JTextField getTextInput() {
+        return textInput;
+    }
+
+    public JLabel getLabelOutput() {
+        return labelOutput;
+    }
 }

@@ -2,14 +2,18 @@ package Service.DataBase;
 
 import java.sql.*;
 
-public class DatabaseCheck {
+public class Database {
     private Connection conn;
     private Statement stmt;
     private ResultSet rset;
 
-    public DatabaseCheck() {
+    public Database() {
+
+    }
+
+    public void createConnection() {
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/database.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/words.db");
             stmt = conn.createStatement();
 
         } catch (SQLException e) {
@@ -17,12 +21,12 @@ public class DatabaseCheck {
         }
     }
 
-    public String getFirstName() {
-        String sqlQuery = "SELECT name FROM temp_table";
+    public String getFirstWord() {
+        String sqlQuery = "SELECT eng FROM table_words";
         String firstName = null;
         try {
             rset = stmt.executeQuery(sqlQuery);
-            firstName = rset.getString("name");
+            firstName = rset.getString("eng");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
