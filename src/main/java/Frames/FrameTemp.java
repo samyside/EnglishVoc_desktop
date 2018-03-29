@@ -21,8 +21,9 @@ public class FrameTemp extends JFrame {
     private JTextField textInput;
     private JLabel labelOutput;
 
+
     private Database database = new Database();
-    private Actions action = new Actions(this, database);
+    private Actions action = new Actions(this);
 
     public FrameTemp() {
         super("Title name");
@@ -43,6 +44,11 @@ public class FrameTemp extends JFrame {
         database.createConnection();
         labelOutput.setText(database.getFirstWord());
 
+        
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 
     public JButton getButton1() {

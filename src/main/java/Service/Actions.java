@@ -18,8 +18,9 @@ public class Actions extends FocusAdapter implements ActionListener {
     private JButton button5;
     private JTextField textInput;
     private JLabel labelOutput;
+    private Database database;
 
-    public Actions(FrameTemp frame, Database database) {
+    public Actions(FrameTemp frame) {
         this.frame = frame;
         button1 = this.frame.getButton1();
         button2 = this.frame.getButton2();
@@ -28,6 +29,7 @@ public class Actions extends FocusAdapter implements ActionListener {
         button5 = this.frame.getButton5();
         textInput = this.frame.getTextInput();
         labelOutput = this.frame.getLabelOutput();
+        database = this.frame.getDatabase();
     }
 
     @Override
@@ -53,6 +55,9 @@ public class Actions extends FocusAdapter implements ActionListener {
             labelOutput.setText("The button#4 has been pressed");
         } else if (e.getSource().equals(button5)) {
             labelOutput.setText("The button#5 has been pressed");
+        } else if (e.getSource().equals(textInput)) {
+            System.out.println("actionPerformed for textInput works");
+            labelOutput.setText(database.getFirstWord());
         }
     }
 }
