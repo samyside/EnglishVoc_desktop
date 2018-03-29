@@ -2,9 +2,11 @@ package Frames;
 
 import Service.Actions;
 import Service.DataBase.Database;
+import Service.Element.Word;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class FrameTemp extends JFrame {
     private JPanel panelMain;
@@ -21,18 +23,19 @@ public class FrameTemp extends JFrame {
     private JTextField textInput;
     private JLabel labelOutput;
 
+    private List<Word> words;
 
     private Database database = new Database();
-    private Actions action = new Actions(this);
 
     public FrameTemp() {
         super("Title name");
         setContentPane(panelMain);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(500, 350));
-        setMaximumSize(new Dimension(800,500));
+        setMaximumSize(new Dimension(800, 500));
         setLocationRelativeTo(null);
 
+        Actions action = new Actions(this);
         textInput.addActionListener(action);
         textInput.addFocusListener(action);
         button1.addActionListener(action);
@@ -44,7 +47,11 @@ public class FrameTemp extends JFrame {
         database.createConnection();
         labelOutput.setText(database.getFirstWord());
 
-        
+
+    }
+
+    public List<Word> getWords() {
+        return words;
     }
 
     public Database getDatabase() {

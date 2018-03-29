@@ -2,12 +2,14 @@ package Service;
 
 import Frames.FrameTemp;
 import Service.DataBase.Database;
+import Service.Element.Word;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.List;
 
 public class Actions extends FocusAdapter implements ActionListener {
     private FrameTemp frame;
@@ -19,6 +21,7 @@ public class Actions extends FocusAdapter implements ActionListener {
     private JTextField textInput;
     private JLabel labelOutput;
     private Database database;
+    private List<Word> words;
 
     public Actions(FrameTemp frame) {
         this.frame = frame;
@@ -30,6 +33,7 @@ public class Actions extends FocusAdapter implements ActionListener {
         textInput = this.frame.getTextInput();
         labelOutput = this.frame.getLabelOutput();
         database = this.frame.getDatabase();
+        words = this.frame.getWords();
     }
 
     @Override
@@ -44,6 +48,7 @@ public class Actions extends FocusAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int count = 0;
 
         if (e.getSource().equals(button1)) {
             labelOutput.setText("The button#1 has been pressed");
@@ -57,7 +62,12 @@ public class Actions extends FocusAdapter implements ActionListener {
             labelOutput.setText("The button#5 has been pressed");
         } else if (e.getSource().equals(textInput)) {
             System.out.println("actionPerformed for textInput works");
-            labelOutput.setText(database.getFirstWord());
+            if (labelOutput.getText().equals(words.get(count).getRusWord())) {
+                System.out.println("Right!");
+                labelOutput.setText(words.get(count).getEngWord());
+            } else {
+                System.out.println("Wrong!");
+            }
         }
     }
 }
