@@ -29,10 +29,10 @@ public class Database {
         String sqlQuery = "SELECT engWord FROM table_words";
         String firstName = null;
         try {
-            rset.beforeFirst();
-            // maybe should be called rset.next()
+//            rset.beforeFirst();
+//            maybe should be called rset.next()
             rset = stmt.executeQuery(sqlQuery);
-            firstName = rset.getString("eng");
+            firstName = rset.getString("engWord");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

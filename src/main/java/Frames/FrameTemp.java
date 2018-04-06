@@ -6,6 +6,8 @@ import Service.Element.Word;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FrameTemp extends JFrame {
@@ -23,7 +25,7 @@ public class FrameTemp extends JFrame {
     private JTextField textInput;
     private JLabel labelOutput;
 
-    private List<Word> words;
+    private ArrayList<Word> words = new ArrayList<>();
 
     private Database database = new Database();
 
@@ -44,10 +46,29 @@ public class FrameTemp extends JFrame {
         button4.addActionListener(action);
         button5.addActionListener(action);
 
+
         database.createConnection();
         labelOutput.setText(database.getFirstWord());
 
+        try {
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:src/main/resources/words.db");
+            Statement stmt = conn.createStatement();
+            ResultSet rset = stmt.executeQuery("SELECT engWord, rusWord FROM table_words");
 
+            while (rset.next()) {
+                words.add(new Word(
+                        rset.getString("engWord"),
+                        rset.getString("rusWord"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        for (Word word : words) {
+            System.out.println(word.getEngWord());
+            System.out.println(word.getRusWord());
+        }
     }
 
     public List<Word> getWords() {

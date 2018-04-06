@@ -9,10 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Actions extends FocusAdapter implements ActionListener {
-    private FrameTemp frame;
     private JButton button1;
     private JButton button2;
     private JButton button3;
@@ -21,19 +20,17 @@ public class Actions extends FocusAdapter implements ActionListener {
     private JTextField textInput;
     private JLabel labelOutput;
     private Database database;
-    private List<Word> words;
+    private ArrayList<Word> words;
 
     public Actions(FrameTemp frame) {
-        this.frame = frame;
-        button1 = this.frame.getButton1();
-        button2 = this.frame.getButton2();
-        button3 = this.frame.getButton3();
-        button4 = this.frame.getButton4();
-        button5 = this.frame.getButton5();
-        textInput = this.frame.getTextInput();
-        labelOutput = this.frame.getLabelOutput();
-        database = this.frame.getDatabase();
-        words = this.frame.getWords();
+        button1 = frame.getButton1();
+        button2 = frame.getButton2();
+        button3 = frame.getButton3();
+        button4 = frame.getButton4();
+        button5 = frame.getButton5();
+        textInput = frame.getTextInput();
+        labelOutput = frame.getLabelOutput();
+        database = frame.getDatabase();
     }
 
     @Override
@@ -62,7 +59,7 @@ public class Actions extends FocusAdapter implements ActionListener {
             labelOutput.setText("The button#5 has been pressed");
         } else if (e.getSource().equals(textInput)) {
             System.out.println("actionPerformed for textInput works");
-            if (labelOutput.getText().equals(words.get(count).getRusWord())) {
+            if (textInput.getText().equals(words.get(count).getRusWord())) {
                 System.out.println("Right!");
                 labelOutput.setText(words.get(count).getEngWord());
             } else {
