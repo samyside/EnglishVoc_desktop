@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FrameTemp extends JFrame {
     private JPanel panelMain;
@@ -69,9 +68,11 @@ public class FrameTemp extends JFrame {
             System.out.println(word.getEngWord());
             System.out.println(word.getRusWord());
         }
+
+
     }
 
-    public List<Word> getWords() {
+    public ArrayList<Word> getWords() {
         return words;
     }
 

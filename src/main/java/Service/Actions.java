@@ -1,7 +1,6 @@
 package Service;
 
 import Frames.FrameTemp;
-import Service.DataBase.Database;
 import Service.Element.Word;
 
 import javax.swing.*;
@@ -19,7 +18,6 @@ public class Actions extends FocusAdapter implements ActionListener {
     private JButton button5;
     private JTextField textInput;
     private JLabel labelOutput;
-    private Database database;
     private ArrayList<Word> words;
 
     public Actions(FrameTemp frame) {
@@ -30,22 +28,26 @@ public class Actions extends FocusAdapter implements ActionListener {
         button5 = frame.getButton5();
         textInput = frame.getTextInput();
         labelOutput = frame.getLabelOutput();
-        database = frame.getDatabase();
+        words = frame.getWords();
     }
 
     @Override
     public void focusGained(FocusEvent e) {
-        textInput.setText("");
+        if (textInput.getText().equals("Enter the answer")) {
+            textInput.setText("");
+        }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        textInput.setText("Enter the your answer");
+        if (textInput.getText().equals("")) {
+            textInput.setText("Enter the answer");
+        }
     }
 
+    private int count;
     @Override
     public void actionPerformed(ActionEvent e) {
-        int count = 0;
 
         if (e.getSource().equals(button1)) {
             labelOutput.setText("The button#1 has been pressed");
@@ -58,12 +60,18 @@ public class Actions extends FocusAdapter implements ActionListener {
         } else if (e.getSource().equals(button5)) {
             labelOutput.setText("The button#5 has been pressed");
         } else if (e.getSource().equals(textInput)) {
-            System.out.println("actionPerformed for textInput works");
-            if (textInput.getText().equals(words.get(count).getRusWord())) {
-                System.out.println("Right!");
-                labelOutput.setText(words.get(count).getEngWord());
-            } else {
-                System.out.println("Wrong!");
+            try {
+                if (textInput.getText().equals(words.get(count).getRusWord())) {
+                    System.out.println(words.get(count).getRusWord() + " - Right!");
+                    count++;
+                    labelOutput.setText(words.get(count).getEngWord());
+                    textInput.setText("");
+                } else {
+                    System.out.println(textInput.getText() + " - Wrong!");
+                }
+            } catch (IndexOutOfBoundsException ex) {
+                ex.printStackTrace();
+                labelOutput.setText("Список слов закончился");
             }
         }
     }
